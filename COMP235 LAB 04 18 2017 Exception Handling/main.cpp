@@ -1,4 +1,4 @@
-# define prog 1
+# define prog 2
 
 
 #if(prog == 1)
@@ -72,7 +72,7 @@ public:
         // cout << "\nPush called. Push a member onto stack\n";
         try {
             if (m_size >= m_capacity) {
-                throw PushToFullStackExeption("\nStack is full, try something else!\n");
+                throw PushToFullStackExeption("Stack is full, try something else!\n");
             } else {
                 m_arr[m_size++] = value;
             }
@@ -85,7 +85,7 @@ public:
         // cout << "\nPop called to pop off last memember of stack \n";
         try {
             if (!(m_size > 0)) {
-                throw PopEmptyStackExeption("\nArray not bigger tha zero. Nothing to pop off!\n");
+                throw PopEmptyStackExeption("Array not bigger tha zero. Nothing to pop off!\n");
             } else {
                 // actually pop something off the stack, it's ok
                 m_arr[m_size--] = NULL;
@@ -103,20 +103,24 @@ private:
 
 int main() {
     
-    cout << "Push pop stack exeptions";
-    
+    cout << "Push & Pop Stack Exeption Examples" << endl;
+    cout << endl;
     // test code
     Stack myStk; //Capacity of 3
-    cout << "Popping right away.\n";
+    cout << "Popping right away... ";
     myStk.pop();
-    cout << "\nPushing 1st item.";
+    cout << "Pushing 1st item... ";
     myStk.push(1);
-    cout << "\nPushing 2nd item.";
+    cout << endl;
+    cout << "Pushing 2nd item... ";
     myStk.push(2);
-    cout << "\nPushing 3rd item.";
+    cout << endl;
+    cout << "Pushing 3rd item... ";
     myStk.push(3);
-    cout << "\nPushing 4th item.";
+    cout << endl;
+    cout << "Pushing 4th item... ";
     myStk.push(4);
+    cout << endl;
     
     return 0;
 }
