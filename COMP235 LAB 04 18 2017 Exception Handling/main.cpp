@@ -1,4 +1,4 @@
-# define prog 2
+# define prog 3
 
 
 #if(prog == 1)
@@ -179,8 +179,7 @@ private:
 //     ProductNotFoundException instead of returning -1
 void getProductID(int ids[], string names[], int numProducts, string target)
 {
-    
-    // try catch
+
     try {
         
         bool productFound = false;
@@ -201,7 +200,6 @@ void getProductID(int ids[], string names[], int numProducts, string target)
         e.what();
 
     }
-
 }
 
 //Given test code in the question. You need to provide exception
@@ -212,10 +210,16 @@ int main()
     string products[]{ "computer", "flash drive",
         "mouse", "printer", "camera" };
     
+    cout << "Get Product IDs" << endl;
+    cout << "Mouse:\t\t\t ";
     getProductID(productIds, products, 5, "mouse");
+    cout << "Camera:\t\t\t ";
     getProductID(productIds, products, 5, "camera");
+    cout << "Flash Drive:\t ";
     getProductID(productIds, products, 5, "flash drive");
+    cout << "Laptop:\t\t\t ";
     getProductID(productIds, products, 5, "laptops");
+    cout << "Computer:\t\t ";
     getProductID(productIds, products, 5, "computer");
     
     cout << endl;
@@ -223,6 +227,21 @@ int main()
     return 0;
     
 }
+
+#elif(prog == 4)
+
+/*
+ Write code to incude these exceptions:
+ overflow_error
+ underflow_error
+ length_error
+ out_of_range
+ */
+
+
+
+
+
 
 #endif
 
