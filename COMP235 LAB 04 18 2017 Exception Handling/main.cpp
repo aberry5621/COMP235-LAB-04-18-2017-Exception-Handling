@@ -1,11 +1,11 @@
-# define prog 3
+# define prog 1
 
 
 #if(prog == 1)
 // EXERCISE 1
 // simple exceptions
 #include <iostream>
-#include <string>
+#include <stdexcept>
 using namespace std;
 
 // simple check
@@ -18,19 +18,33 @@ using namespace std;
 int main() {
     
     int arr[] = { 3, 5, 7, 1, 9 };
-    
+    int my_int = 0;
     cout << "Array created with 5 elements \n";
     string msg = "Error message 1024\n";
+    
+    cout << "Enter an array index: ";
+    int arr_idx = 0;
+    cin >> arr_idx;
+    
     try
     {
-        int my_int = arr[7];
-        exception e(string msg);
-        throw e;
+        // hard code array range check
+        if (arr_idx < 0 || arr_idx > 4)
+        {
+            exception e("ERR");
+            throw e;
+        }
+
+        my_int = arr[arr_idx];
     }
     catch (exception e)
     {
         cout << e.what();
+        exit(1);
     }
+   /* */
+    cout << "Retrieved my int: " << my_int << endl;
+    
     return 0;
 }
 
