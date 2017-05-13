@@ -16,35 +16,25 @@ using namespace std;
 // test by going above or below array indicies
 
 int main() {
-    
     int arr[] = { 3, 5, 7, 1, 9 };
-    int my_int = 0;
-    cout << "Array created with 5 elements \n";
-    string msg = "Error message 1024\n";
-    
     cout << "Enter an array index: ";
     int arr_idx = 0;
     cin >> arr_idx;
-    
     try
     {
         // hard code array range check
         if (arr_idx < 0 || arr_idx > 4)
         {
-            exception e("ERR");
+            exception e;
             throw e;
         }
-
-        my_int = arr[arr_idx];
+        cout << arr[arr_idx] << endl;
     }
     catch (exception e)
     {
-        cout << e.what();
+        cout << e.what() << endl;
         exit(1);
     }
-   /* */
-    cout << "Retrieved my int: " << my_int << endl;
-    
     return 0;
 }
 
