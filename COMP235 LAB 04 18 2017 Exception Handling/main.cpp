@@ -1,4 +1,4 @@
-# define prog 2
+# define prog 4
 
 
 #if(prog == 1)
@@ -328,8 +328,8 @@ public:
                 throw PopEmptyStackException("Array not bigger tha zero. Nothing to pop off!\n");
             } else {
                 // actually pop something off the stack, it's ok
-                m_arr[m_size].product_id = NULL;
-                m_arr[m_size].product_name = "";
+                m_arr[m_size-1].product_id = NULL;
+                m_arr[m_size-1].product_name = "";
                 m_size--;
             }
         }
@@ -399,25 +399,6 @@ int main()
         productStack.push(productIds[i],products[i]);
     }
     
-    /*
-     cout << "Push & Pop Stack Exception Examples" << endl;
-     cout << endl;
-     // test code
-     Stack myStk; //Capacity of 3
-     cout << "Popping right away... ";
-     myStk.pop();
-     cout << "Pushing 1st item... ";
-     myStk.push(1);
-     cout << endl;
-     cout << "Pushing 2nd item... ";
-     myStk.push(2);
-     cout << endl;
-     cout << "Pushing 3rd item... ";
-     myStk.push(3);
-     cout << endl;
-     cout << "Pushing 4th item... ";
-     myStk.push(4);
-     cout << endl; */
     
     bool running = true;
     while (running) {
@@ -471,10 +452,16 @@ int main()
     
 }
 
-
-
-
-
-
 #endif
+
+
+
+
+
+
+
+
+
+
+
 
