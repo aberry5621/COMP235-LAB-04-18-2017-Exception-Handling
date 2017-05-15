@@ -1,4 +1,4 @@
-# define prog 3
+# define prog 4
 
 
 #if(prog == 1)
@@ -237,6 +237,128 @@ int main()
  length_error
  out_of_range
  */
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class ProductNotFoundException
+{
+public:
+    //TO DO: constructor(s)
+    ProductNotFoundException() {}
+    ProductNotFoundException(string msg) {message = msg;}
+    void what()
+    {
+        //TO DO: return exception message
+        cout << "EXCEPTION: Product " << message << " not found!" << endl;
+    }
+private:
+    //TO DO: declare message variable
+    string message;
+};
+
+//Given function in the question. You need to throw a
+//     ProductNotFoundException instead of returning -1
+void getProductID(int ids[], string names[], int numProducts, string target)
+{
+    
+    try {
+        
+        bool productFound = false;
+        
+        for (int i = 0; i < numProducts; i++)
+        {
+            if (names[i] == target) {
+                cout << ids[i] << endl;
+                productFound = true;
+            }
+        }
+        // woops
+        if (!productFound) {
+            throw ProductNotFoundException(target);
+        }
+        
+    } catch (ProductNotFoundException e) {
+        e.what();
+        
+    }
+}
+
+void listProductIds(int productIds [], string products []) {
+
+    cout << "Get Product IDs" << endl;
+    cout << "Mouse:\t\t\t ";
+    getProductID(productIds, products, 5, "mouse");
+    cout << "Camera:\t\t\t ";
+    getProductID(productIds, products, 5, "camera");
+    cout << "Flash Drive:\t ";
+    getProductID(productIds, products, 5, "flash drive");
+    cout << "Laptop:\t\t\t ";
+    getProductID(productIds, products, 5, "laptops");
+    cout << "Computer:\t\t ";
+    getProductID(productIds, products, 5, "computer");
+}
+
+int main()
+{
+    int productIds[]{ 4, 5, 8, 10, 13 };
+    string products[]{ "computer", "flash drive",
+        "mouse", "printer", "camera" };
+    
+    /*
+
+     */
+    
+    bool running = true;
+    while (running) {
+        
+        cout << "Program running - induce some exceptions!\n";
+        
+        char inputChoice = 0;
+        
+        cout << "Make a choice to test exceptions:\n" <<
+        "[1] overflow_error\n" <<
+        "[2] underflow_error\n" <<
+        "[3] length_error\n" <<
+        "[4] out_of_range\n" <<
+        "[X] Quit\n";
+        cout << "Enter choice: [1] [2] [3] [4] [X]: ";
+        
+        cin >> inputChoice;
+        
+        switch (inputChoice) {
+            case '1':
+                cout << "Choice no 1 made. overflow_error\n";
+                break;
+            case '2':
+                cout << "Choice no 2 made. underflow_error\n";
+                break;
+            case '3':
+                cout << "Choice no 3 made. length_error\n";
+                break;
+            case '4':
+                cout << "Choice no 4 made. out_of_range\n";
+                listProductIds(productIds, products);
+                break;
+            case 'X':
+                cout << "Choice X made. Ending program!\n";
+                running = false;
+                break;
+            default:
+                cout << "Invalid choice, try again.\n";
+                break;
+        }
+        
+    }
+    
+    cout << "Program ended!\n";
+    
+    cout << endl;
+    
+    return 0;
+    
+}
 
 
 
