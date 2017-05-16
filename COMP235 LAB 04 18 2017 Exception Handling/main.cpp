@@ -242,8 +242,8 @@ int main()
  Write code to incude these exceptions:
  √ overflow_error
  √ underflow_error
- length_error
- out_of_range
+ √ length_error
+ √ out_of_range
  */
 
 #include <iostream>
@@ -273,6 +273,15 @@ class StringLengthException {
 public:
     StringLengthException() {}
     StringLengthException(string p) { message = p; }
+    string what() { return message; }
+    string message;
+};
+
+// out of range error
+class OutOfRangeException {
+public:
+    OutOfRangeException() {}
+    OutOfRangeException(string p) { message = p; }
     string what() { return message; }
     string message;
 };
@@ -309,17 +318,25 @@ public:
     void push(int value, string name) {
         cout << "\nPush called. Push a member onto stack\n";
         try {
-            if (m_size >= m_capacity) {
-                throw PushToFullStackException("Stack is full, try something else!\n");
-            } else {
-                m_arr[m_size].product_id = value;
-                m_arr[m_size].product_name = name;
-                m_size++;
+            if (name.length() > 80) {
+                throw StringLengthException("EXC: Product Name Too Long!");
             }
-        }
-        catch (PushToFullStackException e) {
+            try {
+                if (m_size >= m_capacity) {
+                    throw PushToFullStackException("Stack is full, try something else!\n");
+                } else {
+                    m_arr[m_size].product_id = value;
+                    m_arr[m_size].product_name = name;
+                    m_size++;
+                }
+            }
+            catch (PushToFullStackException e) {
+                cout << e.what() << endl;
+            }
+        } catch (StringLengthException e) {
             cout << e.what() << endl;
         }
+
     };
     void pop() {
         cout << "\nPop called to pop off last memember of stack \n";
@@ -337,15 +354,27 @@ public:
             cout << e.what() << endl;
         }
     };
+    void getProductByIdx(int arr_idx) {
+        cout << "\nGet product by Index Called \n";
+        try {
+            // hard code array range check
+            if (arr_idx > 4) {
+                throw OutOfRangeException("EXC: Query out of range for product list~!\n");
+            } else {
+                cout << "Returning product info (placeholder)" << endl;
+            }
+        }
+        catch (OutOfRangeException e)
+        {
+            cout << e.what() << endl;
+        }
+    };
 private:
     Product m_arr[5];
     int m_capacity = 5;
     int m_size = 0;
 };
 
-
-//Given function in the question. You need to throw a
-//     ProductNotFoundException instead of returning -1
 void getProductID(int ids[], string names[], int numProducts, string target)
 {
     
@@ -408,14 +437,17 @@ int main()
         char inputChoice = 0;
         
         cout << "Make a choice to test exceptions:\n" <<
-        "[1] overflow_error\n" <<
-        "[2] underflow_error\n" <<
-        "[3] length_error\n" <<
-        "[4] out_of_range\n" <<
-        "[X] Quit\n";
+        "[1] PUSH to overflow_error\n" <<
+        "[2] POP to underflow_error\n" <<
+        "[3] PUSH LONG NAME to length_error\n" <<
+        "[4] QUERY > 5 out_of_range\n" <<
+        "[X] X to Quit\n";
         cout << "Enter choice: [1] [2] [3] [4] [X]: ";
         
         cin >> inputChoice;
+        
+        string newProductName = "";
+        int productLookUpIdx = 0;
         
         switch (inputChoice) {
             case '1':
@@ -428,10 +460,15 @@ int main()
                 break;
             case '3':
                 cout << "Choice no 3 made. length_error\n";
+                cout << "Add a new product name: \n";
+                cin >> newProductName;
+                productStack.push(99, newProductName);
                 break;
             case '4':
                 cout << "Choice no 4 made. out_of_range\n";
-                listProductIds(productIds, products);
+                cout << "Enter a product index to inspect: ";
+                cin >> productLookUpIdx;
+                productStack.getProductByIdx(productLookUpIdx);
                 break;
             case 'X':
                 cout << "Choice X made. Ending program!\n";
