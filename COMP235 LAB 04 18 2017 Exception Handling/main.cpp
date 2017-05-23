@@ -32,7 +32,7 @@ int main() {
     }
     catch (exception e)
     {
-        cout << e.what() << endl;
+        cout << "ERROR!" << endl;
         exit(1);
     }
     return 0;
